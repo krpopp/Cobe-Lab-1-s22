@@ -71,6 +71,7 @@ public class W2GameManager : MonoBehaviour
         //AND
         //if the king game manager is NOT this instance of the class
         //destroy this
+        //if(instance == filled
         if(instance != null && instance != this)
         {
             //what we;re doing is ensuring that there can only
