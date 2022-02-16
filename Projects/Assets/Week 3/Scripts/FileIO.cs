@@ -17,10 +17,17 @@ public class FileIO : MonoBehaviour
     string country = "US";
 
     const char COUNTRY_DELIMITER = '$';
+=======
+    //the name of our file
+    //we're making it a const because it's a variable that really never needs to change
+    //you must include the file ending
+    const string FILE_NAME = "Week3Save.txt";
+>>>>>>> de85dfb422fc1d433c5916812f9fbb89fa2b8243
 
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< HEAD
         StreamWriter writer = new StreamWriter(FILE_NAME, false); //open the file
         //writer.Write("hello i just wrote to this text file yay!");
         writer.Write(playerName + DELIMITER + score); //write the player's name and score, which will look like: karina popp | 1000
@@ -84,4 +91,28 @@ public class FileIO : MonoBehaviour
     {
         Debug.Log(content);
     }
+=======
+        //open the stream writer with the file we want to write to
+        //if the file doesn't exist, the stream writer will create it
+        //the bool at the end decides if we apend to the file
+        //false == overwrite the file
+        //true == add to the file
+        StreamWriter writer = new StreamWriter(FILE_NAME, false);
+        //write to the file
+        writer.Write("hello i just wrote to this text file yay!");
+        //close the stream writer
+        writer.Close();
+
+        //open the stream reader
+        StreamReader reader = new StreamReader(FILE_NAME);
+        //read the line the stream is on
+        //lines end with /n in text
+        //(we'll go over this in week 4)
+        string content = reader.ReadLine();
+        //print the line to the console
+        Debug.Log(content);
+        //close the reader
+        reader.Close();
+    }
+>>>>>>> de85dfb422fc1d433c5916812f9fbb89fa2b8243
 }
