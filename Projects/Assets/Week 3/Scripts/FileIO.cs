@@ -5,7 +5,6 @@ using System.IO;
 
 public class FileIO : MonoBehaviour
 {
-    const string FILE_NAME = "Week3Save.txt"; //the file we're saving to
 
     string content; //will hold the content of the file
 
@@ -17,17 +16,15 @@ public class FileIO : MonoBehaviour
     string country = "US";
 
     const char COUNTRY_DELIMITER = '$';
-=======
+
     //the name of our file
     //we're making it a const because it's a variable that really never needs to change
     //you must include the file ending
     const string FILE_NAME = "Week3Save.txt";
->>>>>>> de85dfb422fc1d433c5916812f9fbb89fa2b8243
 
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< HEAD
         StreamWriter writer = new StreamWriter(FILE_NAME, false); //open the file
         //writer.Write("hello i just wrote to this text file yay!");
         writer.Write(playerName + DELIMITER + score); //write the player's name and score, which will look like: karina popp | 1000
@@ -89,9 +86,7 @@ public class FileIO : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(content);
-    }
-=======
+        
         //open the stream writer with the file we want to write to
         //if the file doesn't exist, the stream writer will create it
         //the bool at the end decides if we apend to the file
@@ -114,5 +109,5 @@ public class FileIO : MonoBehaviour
         //close the reader
         reader.Close();
     }
->>>>>>> de85dfb422fc1d433c5916812f9fbb89fa2b8243
+
 }
