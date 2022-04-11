@@ -270,7 +270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextIndex: 0
-  scoreVal: 0
 --- !u!1 &197630511
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +740,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextIndex: 0
-  scoreVal: 0
 --- !u!1 &801993736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,9 +1013,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  dialogFile: assets/text.json
-  scoreFile: assets/highScore.json
-  scoreURL: https://kpopp.io/highScore.json
   scoreText: {fileID: 801993738}
   dialogText: {fileID: 1139962402}
   choice1Text: {fileID: 334090725}
@@ -1025,7 +1020,8 @@ MonoBehaviour:
   choice1Button: {fileID: 186013227}
   choice2Button: {fileID: 678018826}
   continueButton: {fileID: 1074413146}
-  storyScene: scene1
+  dialogFile: assets/dialogText.json
+  storyScene: sceneOne
   storyIndex: 0
 --- !u!1 &1074413146
 GameObject:
@@ -1173,8 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847326879967d49448052a5062d7594e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextIndex: 0
-  scoreVal: 0
+  nextIndex: 1
 --- !u!1 &1139962400
 GameObject:
   m_ObjectHideFlags: 0
