@@ -12,10 +12,19 @@ public class CameraLook : MonoBehaviour
     GameObject heldObj;
     Vector3 objOriginalPos;
 
+    public float rotationSpeed = .5f;
+
+    public float mouseSenstivity = 100.0f;
+    public float clampAngle = 80.0f;
+    float rotationX = 0;
+    float rotationY = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Vector3 rotation = transform.localRotation.eulerAngles;
+        rotationX = rotation.x;
+        rotationY = rotation.y;
     }
 
     // Update is called once per frame
@@ -39,11 +48,19 @@ public class CameraLook : MonoBehaviour
         {
             //Debug.Log("hit something!");
             //Debug.Log(hitter.collider.gameObject.name);
-            Debug.Break();
-            if(Input.GetMouseButton(0) && hitter.collider.gameObject.tag == "pickable" && heldObj == null)
-            {
-                Debug.Log("can pickup");
-                PickUpObject(hitter.collider.gameObject);
+            if(heldObj != null){
+                if(heldObj.name == hitter.collider.gameObject.name){
+                    float xRotate = Input.GetAxis("Mouse X") * rotationSpeed;
+                    float yRotate = Input.GetAxis("Mouse Y") * rotationSpeed;
+                    heldObj.transform.Rotate(Vector3.up, xRotate);
+                    heldObj.transform.Rotate(Vector3.right, yRotate);
+                }
+            } else{
+                if(Input.GetMouseButton(0) && hitter.collider.gameObject.tag == "pickable" && heldObj == null)
+                {
+                    Debug.Log("can pickup");
+                    PickUpObject(hitter.collider.gameObject);
+                }
             }
         }
 
@@ -51,6 +68,8 @@ public class CameraLook : MonoBehaviour
         {
             DropObject();
         }
+
+        MoveCamera();
     }
 
     void PickUpObject(GameObject obj)
@@ -71,5 +90,18 @@ public class CameraLook : MonoBehaviour
 
         objOriginalPos = Vector3.zero;
         heldObj = null;
+    }
+
+    void MoveCamera(){
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        
+        rotationY += mouseX * mouseSenstivity * Time.deltaTime;
+        rotationX += mouseY * mouseSenstivity * Time.deltaTime;
+
+        rotationX = Mathf.Clamp(rotationX, -clampAngle, clampAngle);
+        
+        Quaternion localRotation = Quaternion.Euler(-rotationX, rotationY, 0.0f);
+        transform.rotation = localRotation;
     }
 }
