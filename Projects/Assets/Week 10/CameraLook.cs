@@ -12,10 +12,21 @@ public class CameraLook : MonoBehaviour
     GameObject heldObj;
     Vector3 objOriginalPos;
 
+    public float rotationSpeed = 2f;
+
+    public float mouseSensitivity = 0.5f;
+    public float clampAngle = 80.0f;
+    float rotationX;
+    float rotationY;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Vector3 startRot = transform.localRotation.eulerAngles;
+        rotationX = startRot.x;
+        rotationY = startRot.y;
     }
 
     // Update is called once per frame
@@ -31,15 +42,28 @@ public class CameraLook : MonoBehaviour
         Vector3 dir = mouseWorldPos - eyePosition;
         dir.Normalize();
 
+        //Debug.Log(dir);
+
         RaycastHit hitter = new RaycastHit();
 
         Debug.DrawLine(eyePosition, dir * 1000f, Color.red);
 
         if (Physics.SphereCast(eyePosition, sphereRadius, dir, out hitter))
         {
-            //Debug.Log("hit something!");
-            //Debug.Log(hitter.collider.gameObject.name);
-            Debug.Break();
+
+            if(heldObj != null)
+            {
+                if(heldObj.name == hitter.collider.gameObject.name)
+                {
+                    // Debug.Log("cursor on held object");
+                    float xRotate = Input.GetAxis("Mouse X") * rotationSpeed;
+                    float yRotate = Input.GetAxis("Mouse Y") * rotationSpeed;
+
+                    heldObj.transform.Rotate(Vector3.down, xRotate);
+                    heldObj.transform.Rotate(Vector3.right, yRotate);
+                }
+            }
+
             if(Input.GetMouseButton(0) && hitter.collider.gameObject.tag == "pickable" && heldObj == null)
             {
                 Debug.Log("can pickup");
@@ -51,6 +75,8 @@ public class CameraLook : MonoBehaviour
         {
             DropObject();
         }
+        MoveCamera();
+        //Debug.Log(transform.rotation);
     }
 
     void PickUpObject(GameObject obj)
@@ -61,7 +87,6 @@ public class CameraLook : MonoBehaviour
         obj.transform.SetParent(gameObject.transform);
 
         Vector3 newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + zOffset);
-
         obj.transform.position = newPos;
     }
 
@@ -71,5 +96,18 @@ public class CameraLook : MonoBehaviour
 
         objOriginalPos = Vector3.zero;
         heldObj = null;
+    }
+
+    void MoveCamera() {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        rotationX += mouseY * mouseSensitivity * Time.deltaTime;
+        rotationY += mouseX * mouseSensitivity * Time.deltaTime;
+
+        rotationX = Mathf.Clamp(rotationX, -clampAngle, clampAngle);
+
+        Quaternion newRotation = Quaternion.Euler(-rotationX, rotationY, 0.0f);
+        transform.rotation = newRotation;
     }
 }

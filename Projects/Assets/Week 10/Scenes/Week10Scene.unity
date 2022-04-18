@@ -505,6 +505,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereRadius: 3
   zOffset: 100
+  rotationSpeed: 20
+  mouseSensitivity: 200
+  clampAngle: 80
 --- !u!1 &889110415
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +596,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889110415}
-  m_LocalRotation: {x: -0, y: -0.35273695, z: -0, w: 0.93572253}
+  m_LocalRotation: {x: 0, y: -0.35274008, z: 0, w: 0.9357213}
   m_LocalPosition: {x: 136, y: 3, z: 183}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
