@@ -19,7 +19,6 @@ public class CameraLook : MonoBehaviour
     float rotationX;
     float rotationY;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +74,7 @@ public class CameraLook : MonoBehaviour
         {
             DropObject();
         }
+
         MoveCamera();
         //Debug.Log(transform.rotation);
     }
@@ -98,6 +98,7 @@ public class CameraLook : MonoBehaviour
         heldObj = null;
     }
 
+<<<<<<< HEAD
     void MoveCamera() {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
